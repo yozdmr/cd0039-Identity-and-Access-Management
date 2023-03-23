@@ -14,13 +14,15 @@ setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 
-
 def setup_db(app):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
 
+def get_db():
+
+    return db
 
 '''
 db_drop_and_create_all()
@@ -64,8 +66,8 @@ class Drink(db.Model):
     '''
 
     def short(self):
-        print(json.loads(self.recipe))
-        short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        print((self.recipe))
+        short_recipe = [{"color": r['color'], "parts": r['parts']} for r in json.loads(self.recipe)]
         return {
             'id': self.id,
             'title': self.title,
